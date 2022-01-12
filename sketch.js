@@ -2,6 +2,7 @@ let kitty;
 let button;
 let playButton;
 let title;
+let border;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -9,29 +10,34 @@ function setup() {
     kitty = new Cat();
     imageMode(CENTER);
 
-    // creating a buttton that controls feeding
     let feedButton = createMyButton(
-        'feed meh!',
+        'feed!',
         'feedButton',
-        width / 2 - 100,
-        200
+        width / 5 + 200,
+        300
     );
     feedButton.mousePressed(feedPressed);
 
-    // creating a button that controls playing
-    let playButton = createMyButton('play!', 'playButton', width / 2, 200);
+    let playButton = createMyButton(
+        'play!',
+        'playButton',
+        width / 5 + 200,
+        400
+    );
     playButton.mousePressed(playPressed);
 
-    title = loadImage('Title.png');
+    title = loadImage('Webpage.png');
+    border = loadImage('Border.png');
 }
 
 function draw() {
-    background(155);
-    // display what's in the Cat class display method
+    background(255);
+
     kitty.display();
-    // allows the cat to poop if needed.
+
     kitty.displayPoops();
-    displayTitle();
+    displayImg(title, width / 2, 85, 0.36);
+    displayImg(border, width / 5, 400, 0.25);
 }
 
 function windowResized() {
@@ -45,19 +51,16 @@ function feedPressed() {
     console.log('times ate:' + kitty.timesAte);
 }
 
-// same thing as above but with playing
 function playPressed() {
     kitty.play();
     console.log(kitty.energy);
 }
 
-// displaying the title
-function displayTitle() {
+function displayImg(name, x, y, factor) {
     // controlling the dimensions of the title
-    let factor = 0.3;
-    let w = title.width * factor;
-    let h = title.height * factor;
-    return image(title, width / 2, 100, w, h);
+    let w = name.width * factor;
+    let h = name.height * factor;
+    return image(name, x, y, w, h);
 }
 
 // more compact way to generate buttons > specifically if needed in the future.

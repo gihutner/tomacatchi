@@ -4,7 +4,7 @@ class Poop {
         this.y = random(height);
 
         this.w = 200;
-        this.image = loadImage('poop.png');
+        this.image = loadImage('Poop.png');
     }
 
     display() {
@@ -16,13 +16,13 @@ class Poop {
             this.image.height * 0.3
         );
     }
-    // checkClicked() {}
+    checkClicked() {}
 
     checkClicked() {
         let d = dist(mouseX, mouseY, this.x, this.y);
 
-        if (d < this.w / 2) {
-            // background(0);
+        if (d < this.w / 2 && mouseClicked() == true) {
+            this.removeChild(this.image);
         }
     }
 }
